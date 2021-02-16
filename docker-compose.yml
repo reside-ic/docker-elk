@@ -21,8 +21,6 @@ services:
       # Use single node discovery in order to disable production mode and avoid bootstrap checks.
       # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
-    networks:
-      - elk
     restart: unless-stopped
 
   kibana:
@@ -37,15 +35,9 @@ services:
         read_only: true
     environment:
       - KIBANA_PASSWORD
-    networks:
-      - elk
     depends_on:
       - elasticsearch
     restart: unless-stopped
-
-networks:
-  elk:
-    driver: bridge
 
 volumes:
   elasticsearch:
